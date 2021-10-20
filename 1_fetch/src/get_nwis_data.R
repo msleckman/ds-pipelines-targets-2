@@ -1,5 +1,5 @@
 
-download_nwis_data <- function(site_nums = c("01427207", "01432160", "01435000", "01436690", "01466500")){
+download_nwis_data <- function(site_nums = c("01427207", "01432160", "01436690", "01466500")){
   
   # create the file names that are needed for download_nwis_site_data
   # tempdir() creates a temporary directory that is wiped out when you start a new R session; 
