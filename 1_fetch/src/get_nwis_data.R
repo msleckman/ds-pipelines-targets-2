@@ -13,10 +13,10 @@ download_nwis_data <- function(site_nums = c("01427207", "01432160", "01436690",
     ## COMMENTED THIS OUT as it breaks the code, tbd why    
     
     # -- simulating a failure-prone web-service here, do not edit --
-    # set.seed(Sys.time())
-    # if (sample(c(T,F,F,F), 1)){
-    #   stop(site_num, ' has failed due to connection timeout. Try tar_make() again')
-    # }
+    set.seed(Sys.time())
+    if (sample(c(T,F,F,F), 1)){
+      stop(site_num, ' has failed due to connection timeout. Try tar_make() again')
+    }
     
     data_out <- bind_rows(data_out, data)
 
