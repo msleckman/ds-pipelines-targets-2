@@ -7,8 +7,6 @@ download_nwis_data <- function(site_nums = c("01427207", "01432160", "01436690",
   data_out <- data.frame()
   
   for(site_num in site_nums){
-    
-    download_file <- file.path(tempdir(), paste0('nwis_', site_num, '_data.csv'))
 
     data <- readNWISdata(sites=site_num, service="iv", parameterCd = parameterCd, startDate = startDate, endDate = endDate)
 
