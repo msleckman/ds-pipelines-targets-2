@@ -8,9 +8,34 @@ tar_option_set(packages = c("tidyverse", "dataRetrieval")) # Loading tidyverse b
 
 p1_targets_list <- list(
   tar_target(
-    site_data,
-    download_nwis_data(),
+    site_data_01427207,
+    download_nwis_data(site_num = "01427207", parameterCd = '00010', startDate = "2014-05-01", endDate = "2015-05-01"),
   ),
+  
+  tar_target(
+    site_data_01432160,
+    download_nwis_data(site_num = "01432160", parameterCd = '00010', startDate = "2014-05-01", endDate = "2015-05-01"),
+  ),
+  
+  tar_target(
+    site_data_01436690,
+    download_nwis_data(site_num = "01436690", parameterCd = '00010', startDate = "2014-05-01", endDate = "2015-05-01"),
+  ),
+  
+  tar_target(
+    site_data_01466500,
+    download_nwis_data(site_num =  "01466500", parameterCd = '00010', startDate = "2014-05-01", endDate = "2015-05-01"),
+  ),
+  
+  tar_target(
+    site_data,
+    combine_nwis_data(site_data_01427207,
+                      site_data_01432160,
+                      site_data_01436690, 
+                      site_data_01466500,
+                      Save_as_csv = F),
+  ),
+  
   
   tar_target(
     site_info_csv,
