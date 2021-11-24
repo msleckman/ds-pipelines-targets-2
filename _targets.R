@@ -11,6 +11,7 @@ p1_targets_list <- list(
     site_data,
     download_nwis_data(),
   ),
+  
   tar_target(
     site_info_csv,
     nwis_site_info(fileout = "1_fetch/out/site_info.csv", site_data),
