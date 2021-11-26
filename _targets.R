@@ -24,7 +24,7 @@ p1_targets_list <- list(
                        parameterCd = parameterCd,
                        startDate = startDate,
                        endDate = endDate),
-    ),
+  ),
   
   tar_target(
     site_data_01432160,
