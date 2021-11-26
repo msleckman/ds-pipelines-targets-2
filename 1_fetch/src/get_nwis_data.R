@@ -23,9 +23,9 @@ combine_nwis_data <- function(...){
 
 ## Save the full downloaded dataset if desired  
 save_nwis_data_csv <- function(data, fileout = "1_fetch/out/nwis_data.csv"){
-
+  
   # Added in case user wants the save the data extracted from NWIS locally
-    write_csv(data, fileout)
+  write_csv(data, fileout)
   return(fileout)
 }
 
