@@ -67,12 +67,15 @@ p1_targets_list <- list(
 
   tar_target(
     site_data,
-    combine_nwis_data(fetch_out_folder)
+    combine_nwis_data(list(site_data_01427207_csv,
+                           site_data_01432160_csv,
+                           site_data_01436690_csv,
+                           site_data_01466500_csv))
   ),
   
   ## changed to object format
   tar_target(
-    site_info_csv,
+    site_info,
     nwis_site_info(fileout = file.path(fetch_out_folder, 'site_info.csv'),
                    data = site_data)
   ),
@@ -96,7 +99,7 @@ p2_targets_list <- list(
   tar_target(
     site_data_annotated,
     annotate_data(site_data_clean,
-                  site_filename = site_info_csv)
+                  site_filename = site_info)
   ),
   
   tar_target(
@@ -110,8 +113,15 @@ p3_targets_list <- list(
   ## changed to object target
   tar_target(
     figure_1,
-    plot_nwis_timeseries(fileout = "3_visualize/out/figure_1.png", site_data_styled),
-    
+    plot_nwis_timeseries(site_data_styled)
+  ),
+  
+  tar_target(
+    figure_1_png,
+    save_nwis_timeseries_plot(plot = figure_1,
+                              fileout = "3_visualize/out/figure_1.png",
+                              width = 12, height = 7, units = 'in'),
+    format = 'file'
   )
 )
 

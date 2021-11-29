@@ -17,16 +17,15 @@ download_nwis_data <- function(site_num, parameterCd, startDate, endDate, fileou
 }
 
 ## Combine nwis datasets 
-combine_nwis_data <- function(file_path_folder){
+combine_nwis_data <- function(downloaded_data_list){
   
-  downloaded_files <- list.files(file_path_folder, '[0-9].csv$')
   data_out <- data.frame()
   
   # CHANGE: loop through individual downloaded files to read in and combine
-  for (download_file in downloaded_files){
+  for (downloaded_data in downloaded_data_list){
     
     # read the downloaded data and append it to the existing data.frame
-    site_data <- read_csv(file.path(file_path_folder, download_file), col_types = 'ccTdcc')
+    site_data <- read_csv(downloaded_data, col_types = 'ccTdcc')
     
     data_out <- dplyr::bind_rows(data_out, site_data)
     
