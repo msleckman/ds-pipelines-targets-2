@@ -15,54 +15,66 @@ parameterCd <- '00010'
 startDate <- "2014-05-01"
 endDate <- "2015-05-01"
 fetch_out_folder <- "1_fetch/out"
+process_out_folder <- '2_process/out'
 
 ## Fetch and save downloaded nwis data info
 p1_targets_list <- list(
   tar_target(
-    site_data_01427207,
+    site_data_01427207_csv,
     download_nwis_data(site_num = site_1,
                        parameterCd = parameterCd,
                        startDate = startDate,
-                       endDate = endDate),
+                       endDate = endDate,
+                       fileout = file.path(fetch_out_folder,paste0('site_',site_1,".csv"))
+                       ),
+    
+    ## Changed to file format
+    format = "file"
   ),
   
   tar_target(
-    site_data_01432160,
+    site_data_01432160_csv,
     download_nwis_data(site_num = site_2,
                        parameterCd = parameterCd,
                        startDate = startDate,
-                       endDate = endDate),
+                       endDate = endDate,
+                       fileout = file.path(fetch_out_folder,paste0('site_',site_2,".csv"))),
+    ## Changed to file format
+    format = "file"
   ),
 
   tar_target(
-    site_data_01436690,
+    site_data_01436690_csv,
     download_nwis_data(site_num = site_3,
                        parameterCd = parameterCd,
                        startDate = startDate,
-                       endDate = endDate),
+                       endDate = endDate,
+                       fileout = file.path(fetch_out_folder,paste0('site_',site_3,".csv"))),
+    ## Changed to file format
+    format = "file"
   ),
 
   tar_target(
-    site_data_01466500,
+    site_data_01466500_csv,
     download_nwis_data(site_num =  site_4,
                        parameterCd = parameterCd,
                        startDate = startDate,
-                       endDate = endDate),
+                       endDate = endDate,
+                       fileout = file.path(fetch_out_folder,paste0('site_',site_4,".csv"))),
+    ## Changed to file format
+    format = "file"
   ),
 
   tar_target(
     site_data,
-    combine_nwis_data(site_data_01427207,
-                      site_data_01432160,
-                      site_data_01436690,
-                      site_data_01466500),
+    combine_nwis_data(fetch_out_folder)
   ),
   
+  ## changed to object format
   tar_target(
     site_info_csv,
     nwis_site_info(fileout = file.path(fetch_out_folder, 'site_info.csv'),
-                   data = site_data),
-    format = "file"
+                   data = site_data)
   ),
 
   # NOTE: This will save the combined site_data to locally. This can be disabled by commenting out the target 
@@ -72,8 +84,7 @@ p1_targets_list <- list(
                        data = site_data),
     format = "file"
   )
-
-)
+) 
 
 ## Process
 p2_targets_list <- list(
@@ -81,10 +92,13 @@ p2_targets_list <- list(
     site_data_clean, 
     process_data(site_data)
   ),
+  
   tar_target(
     site_data_annotated,
-    annotate_data(site_data_clean, site_filename = site_info_csv)
+    annotate_data(site_data_clean,
+                  site_filename = site_info_csv)
   ),
+  
   tar_target(
     site_data_styled,
     style_data(site_data_annotated)
@@ -92,10 +106,11 @@ p2_targets_list <- list(
 )
 
 ## Visualize
+
 p3_targets_list <- list(
   tar_target(
     figure_1_png,
-    plot_nwis_timeseries(fileout = "3_visualize/out/figure_1.png", site_data_styled),
+    plot_nwis_timeseries(fileout = "3_visualize/out/figure_1.png", site_data_styled), 
     format = "file"
   )
 )
