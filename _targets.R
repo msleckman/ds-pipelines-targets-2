@@ -106,11 +106,12 @@ p2_targets_list <- list(
 )
 
 ## Visualize
-
 p3_targets_list <- list(
+  ## changed to object target
   tar_target(
     figure_1,
     plot_nwis_timeseries(fileout = "3_visualize/out/figure_1.png", site_data_styled),
+    
   )
 )
 
