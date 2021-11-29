@@ -77,7 +77,7 @@ p1_targets_list <- list(
                    data = site_data)
   ),
 
-  # NOTE: This will save the combined site_data to locally. This can be disabled by commenting out the target 
+  # NOTE: This will save the combined site_data locally. This can be disabled by commenting out the target 
   tar_target(
     site_data_csv,
     save_nwis_data_csv(fileout = file.path(fetch_out_folder,"nwis_data.csv"),
