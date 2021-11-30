@@ -15,7 +15,6 @@ parameterCd <- '00010'
 startDate <- "2014-05-01"
 endDate <- "2015-05-01"
 fetch_out_folder <- "1_fetch/out"
-process_out_folder <- '2_process/out'
 
 ## Fetch and save downloaded nwis data info
 p1_targets_list <- list(
@@ -76,8 +75,7 @@ p1_targets_list <- list(
   ## changed to object format
   tar_target(
     site_info,
-    nwis_site_info(fileout = file.path(fetch_out_folder, 'site_info.csv'),
-                   data = site_data)
+    nwis_site_info(data = site_data)
   ),
 
   # NOTE: This will save the combined site_data locally. This can be disabled by commenting out the target 
